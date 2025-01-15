@@ -5,7 +5,7 @@ export default function Logo() {
     <div className="logo-container">
       <img
         className="logo-img"
-        src="../public/images/logo.webp"
+        src="/images/logo.webp"
         alt="Two chess pieces"
       />
       <h1 className="logo-title">ChessiHub</h1>
