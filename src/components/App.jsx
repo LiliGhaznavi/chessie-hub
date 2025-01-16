@@ -1,7 +1,14 @@
 import Logo from "./Logo";
+import Registration from "./Registration";
 
 function App() {
-  return <Logo />;
+  return (
+    <div>
+      <Logo />
+
+      <Registration />
+    </div>
+  );
 }
 
 export default App;
