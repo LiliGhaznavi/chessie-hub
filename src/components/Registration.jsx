@@ -1,14 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/Registration.scss";
+import Loading from "./Loading";
+import Game from "./Game";
 
 export default function Registration() {
   const [players, setPlayer] = useState([]);
+  const [allSubmitted, setAllSubmitted] = useState(false);
+  const [showGame, setShowGame] = useState(false);
 
   const addPlayer = (player) => {
-    setPlayer((prev) => [...prev, player]);
+    setPlayer((prev) => {
+      const updatedPlayers = [...prev, player];
+      if (updatedPlayers.length === 2) {
+        setAllSubmitted(true);
+      }
+      return updatedPlayers;
+    });
   };
 
-  return (
+  useEffect(() => {
+    if (allSubmitted) {
+      const timer = setTimeout(() => {
+        setShowGame(true);
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [allSubmitted]);
+
+  if (showGame) {
+    return <Game players={players} />;
+  }
+
+  return allSubmitted ? (
+    <Loading />
+  ) : (
     <div className="registrationContainer">
       <p>Happy to see you on ChessiHub! 😊</p>
       <p>Each player, please fill out and submit your respective form below.</p>
